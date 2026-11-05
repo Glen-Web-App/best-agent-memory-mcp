@@ -35,7 +35,7 @@ Star badges are live. Several projects keep their MCP server inside a larger mon
 
 | # | Name | Hosted or local | Memory stored as | Capture | Team sharing | License | Stars |
 |---|---|---|---|---|---|---|---|
-| 1 | [Glen](https://tryglen.com) | Hosted | Shards and observations on Glen's servers | Plugin or CLI hooks; MCP alone is search only | Org-wide, access checked per observation | Plugin MIT; hosted service | [![Website](https://img.shields.io/badge/site-tryglen.com-111111?style=flat-square)](https://tryglen.com) |
+| 1 | [Glen](https://tryglen.com) | Hosted | Shards and observations on Glen's servers | Plugin or CLI hooks; MCP alone is search only | Org-wide, access checked per observation | Plugin MIT; hosted service | [site](https://tryglen.com) |
 | 2 | [Mem0](https://mem0.ai) | Hosted | Mem0 Platform memories (graph on Custom plan) | Agent calls a tool | Not documented for MCP | Apache-2.0 (core repo) | ![](https://img.shields.io/github/stars/mem0ai/mem0?style=flat-square&label=) |
 | 3 | [Supermemory](https://supermemory.ai) | Hosted; self-host option | Supermemory cloud, organized in spaces | Agent calls a tool; hooks via separate plugins | Team spaces | MIT | ![](https://img.shields.io/github/stars/supermemoryai/supermemory?style=flat-square&label=) |
 | 4 | [Zep Context MCP](https://www.getzep.com) | Hosted; BYOC option | Temporal knowledge graph | Agent calls a tool | Shared Context Graphs with ABAC | Proprietary | closed source |
@@ -778,7 +778,7 @@ Zep and Graphiti (temporal graph), Cognee (graph plus vector), the official memo
 
 ## Related
 
-- [Best Memory Plugins](https://github.com/Glen-Web-App/best-memory-plugins): the companion list, ranking 25 memory plugins for Claude Code, Codex, Cursor and other coding agents, with built-in agent memory compared separately.
+- [Best Memory Plugins](https://github.com/Glen-Web-App/best-memory-plugins): the companion list, ranking 24 memory plugins for Claude Code, Codex, Cursor and other coding agents, with built-in agent memory compared separately.
 
 ## Contributing
 
