@@ -6,13 +6,13 @@
 
 [![List](https://img.shields.io/badge/list-curated-fc60a8?style=flat-square&logo=awesomelists&logoColor=white)](#the-ranked-list)
 [![Last updated](https://img.shields.io/badge/updated-November%202026-blue?style=flat-square)](#how-we-ranked)
-[![Entries](https://img.shields.io/badge/entries-25-informational?style=flat-square)](#at-a-glance)
+[![Entries](https://img.shields.io/badge/entries-26-informational?style=flat-square)](#at-a-glance)
 [![License: CC0-1.0](https://img.shields.io/badge/license-CC0--1.0-lightgrey?style=flat-square)](LICENSE)
 [![PRs welcome](https://img.shields.io/badge/PRs-welcome-brightgreen?style=flat-square)](CONTRIBUTING.md)
 
 </div>
 
-Best Agent Memory MCP compares 25 memory MCP servers that let an AI agent keep facts, decisions and past conversations between sessions. Hosted services (Glen, Mem0, Zep, Supermemory) sit next to open-source servers you run yourself (Hindsight, Basic Memory, Graphiti, Cognee, the official MCP memory server), and every entry says where memory is stored, whether capture is automatic or waits for the agent to call a tool, whether a team can share it, and what it costs. All of them connect to Claude Code, Cursor or Codex over MCP; the entries note which clients each project documents.
+Best Agent Memory MCP compares 26 memory MCP servers that let an AI agent keep facts, decisions and past conversations between sessions. Hosted services (Glen, Mem0, Zep, Supermemory) sit next to open-source servers you run yourself (Hindsight, Basic Memory, Graphiti, Cognee, the official MCP memory server), and every entry says where memory is stored, whether capture is automatic or waits for the agent to call a tool, whether a team can share it, and what it costs. All of them connect to Claude Code, Cursor or Codex over MCP; the entries note which clients each project documents.
 
 **Short answer.** For memory shared across a team's agents, start with Glen. For a hosted personal memory with a free tier, Mem0. For self-hosting with hybrid retrieval, Hindsight. For memory you can read and edit as files, Basic Memory. For a zero-dependency baseline, the official memory server.
 
@@ -60,10 +60,11 @@ Star badges are live. Several projects keep their MCP server inside a larger mon
 | 23 | [mcp-knowledge-graph](https://github.com/shaneholloman/mcp-knowledge-graph) | Local | Project-local JSONL graph | Agent calls a tool | None described | MIT | ![](https://img.shields.io/github/stars/shaneholloman/mcp-knowledge-graph?style=flat-square&label=) |
 | 24 | [MemoryMesh](https://github.com/CheMiguel23/MemoryMesh) | Local | JSON knowledge graph with your schemas | Prompt instructions you write | None described | MIT | ![](https://img.shields.io/github/stars/CheMiguel23/MemoryMesh?style=flat-square&label=) |
 | 25 | [Stash](https://github.com/alash3al/stash) | Self-hosted | Postgres | MCP tools | Not documented | Apache-2.0 | ![](https://img.shields.io/github/stars/alash3al/stash?style=flat-square&label=) |
+| 26 | [ClickHouse Loom](https://github.com/ClickHouse/loom) | Self-hosted | ClickHouse; optional Postgres for live memory | Tool calls; plugins add hooks | Namespace-scoped roles | Apache-2.0 | ![](https://img.shields.io/github/stars/ClickHouse/loom?style=flat-square&label=) |
 
 ## How we ranked
 
-Glen's first place is the maintainer's pick. Entries 2 to 25 are ordered on these criteria, read from each project's README, docs, pricing page and the GitHub API in early November 2026:
+Glen's first place is the maintainer's pick. Entries 2 to 26 are ordered on these criteria, read from each project's README, docs, pricing page and the GitHub API in November 2026:
 
 1. **Maintained.** A commit or release in the last 6 months. Archived, winding-down and stale projects go to [Deprecated or not recommended](#deprecated-or-not-recommended) instead of the ranking.
 2. **Ships an MCP server for memory.** A generic database tool, a code index or an MCP server where memory is a side feature does not qualify. That leaves out `DeusData/codebase-memory-mcp` (code intelligence), the Chroma, Milvus and Weaviate servers (generic vector stores) and Serena (memory is one small feature of a coding toolkit).
@@ -718,9 +719,29 @@ Episodes, facts and working context stored in Postgres, from a self-hosted singl
 
 **Best for:** self-hosters who want memory in their own Postgres.
 
+### 26. ClickHouse Loom
+
+[![Stars](https://img.shields.io/github/stars/ClickHouse/loom?style=flat-square&label=stars)](https://github.com/ClickHouse/loom)
+![License](https://img.shields.io/badge/license-Apache--2.0-blue?style=flat-square)
+![Last commit](https://img.shields.io/github/last-commit/ClickHouse/loom?style=flat-square)
+
+Namespace-scoped tokens let different agents read and write the same long-term memory through a self-hosted MCP server ([v1.3.0 README](https://github.com/ClickHouse/loom/blob/v1.3.0/README.md#what-loom-is-for)). Memory is a primary use case alongside document search and code intelligence; the star badge covers the whole repository.
+
+**Key facts:** ClickHouse storage, with an optional Postgres authority for live memory and knowledge state · MCP, HTTP, Python and TypeScript clients · Apache-2.0 ([README](https://github.com/ClickHouse/loom/blob/v1.3.0/README.md), [license](https://github.com/ClickHouse/loom/blob/v1.3.0/LICENSE)). Claude Code and Codex plugins add session capture and context injection; a plain MCP connection relies on tool calls ([Claude Code](https://github.com/ClickHouse/loom/blob/v1.3.0/docs/features/integrations/claude-code.md), [Codex](https://github.com/ClickHouse/loom/blob/v1.3.0/docs/features/integrations/codex.md)).
+
+**Strengths**
+- Shared memory with namespace-scoped read and write roles ([README](https://github.com/ClickHouse/loom/blob/v1.3.0/README.md)).
+- Plugins load context at session start, record tool observations and extract session facts when an LLM is configured ([hooks](https://github.com/ClickHouse/loom/blob/v1.3.0/docs/features/integrations/claude-code.md#what-the-hooks-do), [model setup](https://github.com/ClickHouse/loom/blob/v1.3.0/README.md#2-configure-models-and-api-keys)).
+
+**Weaknesses**
+- Requires operating a Loom server and ClickHouse; the plugin alone is not a memory store ([quickstart](https://github.com/ClickHouse/loom/blob/v1.3.0/docs/getting-started/quickstart.md)).
+- The stock fake LLM provides no meaningful extraction, summaries or answers; those need a configured model. Hosting and any model-provider charges are separate from the Apache-2.0 license ([model setup](https://github.com/ClickHouse/loom/blob/v1.3.0/README.md#2-configure-models-and-api-keys)).
+
+**Best for:** teams running a shared memory service with separate access scopes for their agents.
+
 ## Deprecated or not recommended
 
-Not counted in the 25. Links point at the old projects so you can recognize them in older tutorials.
+Not counted in the 26. Links point at the old projects so you can recognize them in older tutorials.
 
 - **[mem0ai/mem0-mcp](https://github.com/mem0ai/mem0-mcp):** archived; its README says it is no longer maintained and points to Mem0's hosted MCP.
 - **Mem0 OpenMemory (self-hosted):** removed from the mem0 monorepo on 2026-07-29; the `openmemory/` path is gone. `mem0ai/openmemory` is now an unrelated CLI for porting coding sessions.
@@ -746,7 +767,7 @@ An MCP server that stores what an agent learns (facts, decisions, past conversat
 
 ### Which memory MCP server is best for Claude Code, Cursor or Codex?
 
-All 25 speak MCP, but documented support varies. Mem0 documents Claude Code, Codex and Cursor; Zep documents Claude Code, Codex CLI and Cursor; Basic Memory, Membase and Glen work across all three. For automatic capture in Claude Code, look at entries with hooks (Glen, claude-mem, agentmemory, mcp-memory-service, deja-vu), or see the [plugins list](https://github.com/Glen-Web-App/best-memory-plugins).
+All 26 speak MCP, but documented support varies. Mem0 documents Claude Code, Codex and Cursor; Zep documents Claude Code, Codex CLI and Cursor; Basic Memory, Membase and Glen work across all three. For automatic capture in Claude Code, look at entries with hooks (Glen, claude-mem, agentmemory, mcp-memory-service, deja-vu), or see the [plugins list](https://github.com/Glen-Web-App/best-memory-plugins).
 
 ### What are the best Mem0 MCP alternatives?
 
