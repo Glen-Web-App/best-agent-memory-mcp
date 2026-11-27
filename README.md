@@ -6,7 +6,7 @@
 
 [![List](https://img.shields.io/badge/list-curated-fc60a8?style=flat-square&logo=awesomelists&logoColor=white)](#the-ranked-list)
 [![Last updated](https://img.shields.io/badge/updated-November%202026-blue?style=flat-square)](#how-we-ranked)
-[![Entries](https://img.shields.io/badge/entries-25-informational?style=flat-square)](#at-a-glance)
+[![Entries](https://img.shields.io/badge/entries-26-informational?style=flat-square)](#at-a-glance)
 [![License: CC0-1.0](https://img.shields.io/badge/license-CC0--1.0-lightgrey?style=flat-square)](LICENSE)
 [![PRs welcome](https://img.shields.io/badge/PRs-welcome-brightgreen?style=flat-square)](CONTRIBUTING.md)
 
@@ -717,6 +717,33 @@ Episodes, facts and working context stored in Postgres, from a self-hosted singl
 - Supported clients and capture model: not published in the project summary.
 
 **Best for:** self-hosters who want memory in their own Postgres.
+
+### 26. YantrikDB MCP
+
+[![Stars](https://img.shields.io/github/stars/yantrikos/yantrikdb-mcp?style=flat-square&label=stars)](https://github.com/yantrikos/yantrikdb-mcp)
+![License](https://img.shields.io/badge/license-MIT-blue?style=flat-square)
+![Last commit](https://img.shields.io/github/last-commit/yantrikos/yantrikdb-mcp?style=flat-square)
+
+`think()` runs a consolidation pass that flags when two stored memories about the same subject disagree, and marks the open conflict on the next `recall` instead of silently keeping both ([README](https://github.com/yantrikos/yantrikdb-mcp)).
+
+**Key facts:** local SQLite at `~/.yantrikdb/memory.db`, or a self-run HTTP cluster · 21 tools (`remember`, `recall`, `think`, `conflict`, `graph` and more) · listed in the official MCP Registry as `io.github.yantrikos/yantrikdb-mcp` · wrapper MIT, engine Apache-2.0 · documented for Claude Code, Cursor, Windsurf, Continue, Claude Desktop and Hermes Agent.
+
+```bash
+uvx yantrikdb-mcp
+```
+
+**Strengths**
+- Conflict detection with a `conflict()` API to list, resolve or reclassify disputed memories instead of just overwriting them.
+- No API key and no account; runs entirely local by default.
+- Both the server and the underlying engine use a permissive license (MIT, Apache-2.0).
+
+**Weaknesses**
+- Capture happens only when the agent decides to call `remember`, the same tier as the official server; there are no session-lifecycle hooks, so a client that never calls the tools captures nothing automatically.
+- No documented multi-user or team-sharing story; storage is a single local file or a self-run HTTP cluster, with access control left to the operator.
+- No LoCoMo or LongMemEval numbers were found in this repo; a separate benchmark exists on the project's own site but is not linked from here.
+- 21 tools is a larger surface than most entries on this list.
+
+**Best for:** developers who want disagreement tracking between stored memories, not just storage and retrieval, and would rather not run a hosted service.
 
 ## Deprecated or not recommended
 
